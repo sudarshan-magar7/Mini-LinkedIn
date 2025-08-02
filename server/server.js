@@ -16,8 +16,19 @@ const app = express();
 
 // Security middleware
 app.use(helmet());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://mini-linked-nzxh1wvfq-sudarshans-projects-203c931f.vercel.app'
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
