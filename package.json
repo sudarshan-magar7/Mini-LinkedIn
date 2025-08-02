@@ -1,0 +1,21 @@
+{
+  "name": "mini-linkedin",
+  "version": "1.0.0",
+  "description": "Mini LinkedIn-like Community Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudarshan-magar7/Mini-LinkedIn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sudarshan-magar7/Mini-LinkedIn/issues"
+  },
+  "homepage": "https://github.com/sudarshan-magar7/Mini-LinkedIn#readme"
+}
