@@ -20,7 +20,8 @@ app.use(helmet());
 // Define allowed origins
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://mini-linked-nzxh1wvfq-sudarshans-projects-203c931f.vercel.app'
+  'https://mini-linked-nzxh1wvfq-sudarshans-projects-203c931f.vercel.app',
+  'https://mini-linked-in.vercel.app'
 ];
 
 // Fix: Safer CORS origin handling
