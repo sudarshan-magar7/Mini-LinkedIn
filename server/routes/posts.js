@@ -7,6 +7,7 @@ const {
 } = require('../controllers/postController');
 const { protect } = require('../middleware/auth');
 
+
 const router = express.Router();
 
 router.route('/')

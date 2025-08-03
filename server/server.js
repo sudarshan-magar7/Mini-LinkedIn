@@ -16,31 +16,55 @@ const app = express();
 
 // Security middleware
 app.use(helmet());
-
-// Define allowed origins
 const allowedOrigins = [
   'http://localhost:3000',
   'https://mini-linked-nzxh1wvfq-sudarshans-projects-203c931f.vercel.app',
   'https://mini-linked-in.vercel.app'
 ];
 
-// Fix: Safer CORS origin handling
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.warn(`❌ CORS blocked: ${origin}`);
-      // Gracefully deny instead of throwing error
-      callback(null, false);
-    }
-  },
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true
-}));
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   methods: ['GET', 'POST', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type'],
+//   credentials: true
+// }));
 
-app.options('*', cors());
+
+// Fix: Safer CORS origin handling
+
+app.use(cors({
+
+  origin: function (origin, callback) {
+
+    if (!origin || allowedOrigins.includes(origin)) {
+
+      callback(null, true);
+
+    } else {
+
+      console.warn(`CORS blocked: ${origin}`);
+
+      // Gracefully deny instead of throwing error
+
+      callback(null, false);
+
+    }
+
+  },
+
+  methods: ['GET', 'POST', 'OPTIONS'],
+
+  allowedHeaders: ['Content-Type'],
+
+  credentials: true
+
+}));
 
 // Rate limiting
 const limiter = rateLimit({
@@ -63,11 +87,11 @@ app.get('/api/health', (req, res) => {
   res.json({ message: 'ConnectHub API is running!' });
 });
 
-// Error handler middleware (must be after routes)
+// Error handler
 app.use(errorHandler);
 
-// Start server
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
