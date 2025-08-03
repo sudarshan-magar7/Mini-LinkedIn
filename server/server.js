@@ -27,18 +27,20 @@ const allowedOrigins = [
 // Fix: Safer CORS origin handling
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like Postman, cURL, etc.)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      console.error(`❌ Blocked by CORS: ${origin}`);
-      callback(new Error('Not allowed by CORS'));
+      console.warn(`❌ CORS blocked: ${origin}`);
+      // Gracefully deny instead of throwing error
+      callback(null, false);
     }
   },
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
   credentials: true
 }));
+
+app.options('*', cors());
 
 // Rate limiting
 const limiter = rateLimit({
